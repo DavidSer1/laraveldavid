@@ -4,16 +4,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/fecha', function() {
-return date("d/m/y h:i:s");
-});
+})->name('inicio');
 
 Route::get('/posts', function () {
-    return view('listadoposts');
-});
+    return view('posts.listado');
+})->name('posts_listado');
 
 Route::get('/posts/{id}', function ($id) {
-    return "Ficha del post $id";
+    return view('posts.ficha', ['id' => $id]);
 })->where('id', '[0-9]+')->name('posts_ficha');
