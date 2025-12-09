@@ -6,7 +6,6 @@
 </head>
 <body>
 
-  
     @include('partials.nav')
 
     <header>
