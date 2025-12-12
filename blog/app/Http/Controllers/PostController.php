@@ -11,7 +11,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+  return "Listado de posts desde el controlador";
     }
 
     /**
@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+  
     }
 
     /**
@@ -35,7 +35,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+         return "Ficha de posts desde el controlador   " . $id;
     }
 
     /**
