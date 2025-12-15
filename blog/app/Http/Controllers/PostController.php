@@ -39,11 +39,14 @@ public function index()
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-  return view('posts.show', compact('id'));
+public function show(string $id)
+{
+    $post = Post::findOrFail($id);
 
-    }
+    return view('posts.show', compact('post'));
+}
+
+
 
     /**
      * Show the form for editing the specified resource.
