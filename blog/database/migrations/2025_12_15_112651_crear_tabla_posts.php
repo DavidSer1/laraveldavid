@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('usuarios', function (Blueprint $table) {
-    $table->id();              
-    $table->string('login');   
-    $table->string('password'); 
-    $table->timestamps();       
-});
-
-
-   
+       Schema::create('posts', function (Blueprint $table) {
+            $table->id();                
+            $table->string('titulo');    
+            $table->text('contenido');   
+            $table->timestamps();        
+        });
     }
 
     /**
@@ -27,8 +24,6 @@ Schema::create('usuarios', function (Blueprint $table) {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('posts');
     }
 };
