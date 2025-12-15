@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-  public function index()
+public function index()
 {
-    return view('posts.index');
+  $posts = Post::orderBy('titulo', 'asc')->paginate(5);
+    return view('posts.index', compact('posts'));
 }
+
+
 
 
     /**
