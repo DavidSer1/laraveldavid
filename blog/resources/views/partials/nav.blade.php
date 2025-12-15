@@ -20,8 +20,25 @@
       <ul class="navbar-nav">
       
         <li class="nav-item">
-          <a class="fw-bold nav-link text-white " href="{{ route('posts_listado') }}">Listado de posts</a>
+         <a class="fw-bold nav-link text-white" href="{{ route('posts.index') }}">
+    Listado de posts
+</a>
+
         </li>
+            <li class="nav-item">
+         <a class="fw-bold nav-link text-white" href="{{ route('posts.create') }}">
+    Creacion de posts
+</a>
+        </li>
+          @if (isset($id))
+<li class="nav-item">
+    <a class="fw-bold nav-link text-white"
+       href="{{ route('posts.edit', $id) }}">
+        Edición de posts
+    </a>
+</li>
+@endif
+
       </ul>
     </div>
   </div>

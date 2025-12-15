@@ -9,17 +9,18 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-  return "Listado de posts desde el controlador";
-    }
+  public function index()
+{
+    return view('posts.index');
+}
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-  
+  return view('posts.create');
     }
 
     /**
@@ -35,7 +36,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-         return "Ficha de posts desde el controlador   " . $id;
+  return view('posts.show', compact('id'));
+
     }
 
     /**
@@ -43,7 +45,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('posts.edit', compact('id'));
     }
 
     /**
