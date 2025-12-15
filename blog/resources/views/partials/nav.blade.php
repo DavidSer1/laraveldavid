@@ -46,6 +46,11 @@
 
 <div class="container mt-4">
     @yield('content')
+    <div class="d-flex justify-content-end">
+   <small class="text-muted">
+        {{ fechaActual('d/m/Y') }}
+    </small>
+    </div>
 </div>
 
 <script src="{{ asset('js/app.js') }}"></script>
