@@ -2,7 +2,7 @@
 
 @section('titulo', 'Listado de Posts')
 
-@section('contenido')
+@section('contenido') 
 
 <div class="container mt-5">
     <h2 class="text-center mb-4">Listado de Posts</h2>
@@ -25,6 +25,11 @@
                                 <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary  px-2">
                                     Ver
                                 </a>
+                                <form action="{{ route('posts.destroy', $post) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button>Borrar</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

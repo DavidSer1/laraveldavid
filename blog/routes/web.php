@@ -10,4 +10,4 @@ Route::get('/', function () {
 
 
 Route::resource('posts', PostController::class)
-->only(['index', 'show', 'create', 'edit']);
+->only(['index', 'show', 'create', 'edit', 'destroy']);

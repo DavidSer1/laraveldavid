@@ -67,8 +67,11 @@ public function show(string $id)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+public function destroy(string $id)
+{
+    Post::findOrFail($id)->delete();
+    return redirect()->route('posts.index')
+    ->with('success', 'Post eliminado correctamente');
+}
+
 }
