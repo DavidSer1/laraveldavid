@@ -46,6 +46,26 @@ public function show(string $id)
     return view('posts.show', compact('post'));
 }
 
+public function nuevoPrueba(){
+    $post = new Post();
+    $post->titulo= rand(100,999);
+    $post->contenido=rand(100,999);
+    $post->created_at= now();
+    $post->updated_at= now();
+    $post->save();
+}
+
+public function editarPrueba(string $id){
+$posts = Post::findOrFail($id);
+$posts->titulo="Otro título";
+$posts->contenido= "Finalmente he editado el contenido";
+
+ $posts->updated_at= now();
+$posts->save();
+  
+
+}
+
 
 
     /**

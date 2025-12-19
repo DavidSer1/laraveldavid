@@ -7,6 +7,9 @@ Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
 
+Route::get('/posts/prueba', [PostController::class, 'nuevoPrueba']);
+
+Route::get('/posts/editar-prueba/{id}', [PostController::class, 'editarPrueba']);
 
 
 Route::resource('posts', PostController::class)
