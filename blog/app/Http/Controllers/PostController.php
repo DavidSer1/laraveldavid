@@ -39,40 +39,37 @@ public function index()
     /**
      * Display the specified resource.
      */
-public function show(string $id)
-{
+public function show(string $id) {
     $post = Post::findOrFail($id);
-
     return view('posts.show', compact('post'));
 }
 
-public function nuevoPrueba()
-{
+public function nuevoPrueba() {
     $post = new Post();
     $post->titulo = rand(100,999);
     $post->contenido = rand(100,999);
     $post->created_at = now();
     $post->updated_at = now();
     $post->save();
-
     return redirect('/posts')
         ->with('success', 'El post se ha creado correctamente');
 }
 
+public function destroy(string $id) {
+    Post::findOrFail($id)->delete();
+    return redirect()->route('posts.index')
+    ->with('success', 'Post eliminado correctamente');
+}
 
 public function editarPrueba(string $id){
-$posts = Post::findOrFail($id);
-$posts->titulo="Otro título";
-$posts->contenido= "Finalmente he editado el contenido";
-
- $posts->updated_at= now();
-$posts->save();
-    return redirect('/posts')
-        ->with('success', 'El post se ha editado correctamente');
+    $posts = Post::findOrFail($id);
+    $posts->titulo="Este es un titulo actualizado";
+    $posts->contenido= "Este contenido contiene imformacion actualizada del post.";
+    $posts->updated_at= now();
+    $posts->save();
+    return redirect('/posts')->with('success', 'El post se ha editado correctamente');
 }
   
-
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -92,11 +89,6 @@ $posts->save();
     /**
      * Remove the specified resource from storage.
      */
-public function destroy(string $id)
-{
-    Post::findOrFail($id)->delete();
-    return redirect()->route('posts.index')
-    ->with('success', 'Post eliminado correctamente');
-}
+
 
 }
