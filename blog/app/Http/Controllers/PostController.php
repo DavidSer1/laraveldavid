@@ -46,14 +46,19 @@ public function show(string $id)
     return view('posts.show', compact('post'));
 }
 
-public function nuevoPrueba(){
+public function nuevoPrueba()
+{
     $post = new Post();
-    $post->titulo= rand(100,999);
-    $post->contenido=rand(100,999);
-    $post->created_at= now();
-    $post->updated_at= now();
+    $post->titulo = rand(100,999);
+    $post->contenido = rand(100,999);
+    $post->created_at = now();
+    $post->updated_at = now();
     $post->save();
+
+    return redirect('/posts')
+        ->with('success', 'El post se ha creado correctamente');
 }
+
 
 public function editarPrueba(string $id){
 $posts = Post::findOrFail($id);
@@ -62,10 +67,10 @@ $posts->contenido= "Finalmente he editado el contenido";
 
  $posts->updated_at= now();
 $posts->save();
-  
-
+    return redirect('/posts')
+        ->with('success', 'El post se ha editado correctamente');
 }
-
+  
 
 
     /**

@@ -6,6 +6,17 @@
 
 <div class="container mt-5">
     <h2 class="text-center mb-4">Listado de Posts</h2>
+    <div class="d-flex justify-content-end mb-3">
+    <a href="{{ url('/posts/prueba') }}" class="btn btn-success">
+         Crear post
+    </a>
+</div>
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -21,16 +32,25 @@
                         @foreach($posts as $post)
                         <tr>
                             <td>{{ $post->titulo }}</td>
-                            <td class="text-center">
-                                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary  px-2">
-                                    Ver
-                                </a>
-                                <form action="{{ route('posts.destroy', $post) }}" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <button>Borrar</button>
-                                </form>
-                            </td>
+                      <td class="text-center">
+    <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary btn-sm me-1">
+        Ver
+    </a>
+
+     <a href="{{ url('/posts/editar-prueba/' . $post->id) }}" class="btn btn-warning btn-sm me-1">
+        Editar
+    </a>
+
+    <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline">
+        @method('DELETE')
+        @csrf
+        <button type="submit" class="btn btn-danger btn-sm"
+            onclick="return confirm('¿Seguro que quieres borrar este post?')">
+            Borrar
+        </button>
+    </form>
+</td>
+
                         </tr>
                         @endforeach
                     </tbody>
