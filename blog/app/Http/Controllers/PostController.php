@@ -13,9 +13,13 @@ class PostController extends Controller
      */
 public function index()
 {
-  $posts = Post::orderBy('titulo', 'asc')->paginate(5);
+    $posts = Post::with('usuario')
+        ->orderBy('titulo', 'asc')
+        ->paginate(5);
+
     return view('posts.index', compact('posts'));
 }
+
 
 
 
@@ -48,12 +52,15 @@ public function nuevoPrueba() {
     $post = new Post();
     $post->titulo = rand(100,999);
     $post->contenido = rand(100,999);
+    $post->usuario_id = 1;
     $post->created_at = now();
     $post->updated_at = now();
     $post->save();
+
     return redirect('/posts')
         ->with('success', 'El post se ha creado correctamente');
 }
+
 
 public function destroy(string $id) {
     Post::findOrFail($id)->delete();
