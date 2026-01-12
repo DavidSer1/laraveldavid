@@ -25,6 +25,8 @@
                     <thead class="table-dark">
                         <tr>
                             <th>Título</th>
+                             <th>Contenido</th>
+                               <th>Usuario</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -32,6 +34,8 @@
                         @foreach($posts as $post)
                         <tr>
                             <td>{{ $post->titulo }}</td>
+                            <td>{{ $post->contenido }}</td>
+                            <td>{{ $post->usuario ? $post->usuario->name : 'Sin usuario' }}</td>
                       <td class="text-center">
     <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary btn-sm me-1">
         Ver
