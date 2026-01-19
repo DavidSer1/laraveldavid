@@ -91,8 +91,9 @@ public function editarPrueba(string $id){
      */
     public function edit(string $id)
     {
-        return view('posts.edit', compact('id'));
-        
+    $post = Post::findOrFail($id);
+    return view('posts.edit', compact('post'));
+
     }
 
     /**
@@ -100,7 +101,17 @@ public function editarPrueba(string $id){
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'titulo' => 'required|string|max:255',
+            'contenido' => 'required|string',
+        ]);
+        $post = Post::findOrFail($id);
+        $post->titulo = $validated['titulo'];
+        $post->contenido = $validated['contenido'];
+        $post->updated_at = now();
+        $post->save();
+           return redirect('/posts')->with('success', 'El post se ha actualizado correctamente');
+
     }
 
     /**

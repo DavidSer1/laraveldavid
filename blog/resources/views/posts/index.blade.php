@@ -42,9 +42,11 @@
         Ver
     </a>
 
-     <a href="{{ url('/posts/editar-prueba/' . $post->id) }}" class="btn btn-warning btn-sm me-1">
-        Editar
-    </a>
+ <a href="{{ route('posts.edit', $post->id) }}"
+   class="btn btn-warning btn-sm me-1">
+    Editar
+</a>
+
 
     <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline">
         @method('DELETE')
