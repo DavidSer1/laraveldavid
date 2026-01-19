@@ -7,7 +7,7 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Listado de Posts</h2>
     <div class="d-flex justify-content-end mb-3">
-    <a href="{{ url('/posts/prueba') }}" class="btn btn-success">
+    <a href="{{ url('/posts/create') }}" class="btn btn-success">
          Crear post
     </a>
 </div>
@@ -35,7 +35,8 @@
                         <tr>
                             <td>{{ $post->titulo }}</td>
                             <td>{{ $post->contenido }}</td>
-                            <td>{{ $post->usuario->name  }}</td>
+                             <td>{{ $post->usuario ? $post->usuario->name : 'No asignado' }}</td>
+                          
                       <td class="text-center">
     <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary btn-sm me-1">
         Ver

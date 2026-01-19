@@ -32,10 +32,22 @@ public function index()
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'titulo' => 'required|string|max:255',
+        'contenido' => 'required|string',
+    ]);
+
+    Post::create([
+        'titulo' => $validated['titulo'],
+        'contenido' => $validated['contenido'],
+        'usuario_id' => 17, 
+    ]);
+
+    return redirect()->route('posts.index')
+        ->with('success', 'Post creado correctamente');
+}
 
     /**
      * Display the specified resource.
@@ -80,6 +92,7 @@ public function editarPrueba(string $id){
     public function edit(string $id)
     {
         return view('posts.edit', compact('id'));
+        
     }
 
     /**

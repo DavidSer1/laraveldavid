@@ -4,4 +4,6 @@
 
 @section('contenido')
     <h2>Edicion fichero {{ $id }}</h2>
+
+    
 @endsection
