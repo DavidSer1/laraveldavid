@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
+
 use App\Models\Post;
 
 
@@ -32,22 +33,18 @@ public function index()
     /**
      * Store a newly created resource in storage.
      */
-public function store(Request $request)
+public function store(PostRequest $request)
 {
-    $validated = $request->validate([
-        'titulo' => 'required|string|max:255',
-        'contenido' => 'required|string',
-    ]);
-
     Post::create([
-        'titulo' => $validated['titulo'],
-        'contenido' => $validated['contenido'],
+        'titulo' => $request->titulo,
+        'contenido' => $request->contenido,
         'usuario_id' => 17, 
     ]);
 
     return redirect()->route('posts.index')
         ->with('success', 'Post creado correctamente');
 }
+
 
     /**
      * Display the specified resource.

@@ -11,7 +11,7 @@ class PostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,8 +22,8 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:30|min:5',
-            'content' => 'required|string|min:50',
+            'titulo' => 'required|string|max:30|min:5',
+            'contenido' => 'required|string|min:50',
         ];
     }
 }
