@@ -10,13 +10,15 @@ class UserFactory extends Factory
 {
     protected $model = User::class;
 
+
     public function definition(): array
+  
     {
+            $name = $this->faker->name();
         return [
-            'name' => $this->faker->name(),
+             'name' => $name,
             'email' => $this->faker->unique()->safeEmail(),
-            
-            'password' => Hash::make('password123'),
+             'password' => bcrypt($name),
         ];
     }
 }
