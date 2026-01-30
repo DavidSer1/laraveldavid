@@ -2,10 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
+
+Route::get('login', [LoginController::class, 'loginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
 /*
 Route::get('/posts/prueba', [PostController::class, 'nuevoPrueba']);
 
