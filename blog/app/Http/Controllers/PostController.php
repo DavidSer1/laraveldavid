@@ -96,20 +96,16 @@ public function editarPrueba(string $id){
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        $validated = $request->validate([
-            'titulo' => 'required|string|max:255',
-            'contenido' => 'required|string',
-        ]);
-        $post = Post::findOrFail($id);
-        $post->titulo = $validated['titulo'];
-        $post->contenido = $validated['contenido'];
-        $post->updated_at = now();
-        $post->save();
-           return redirect('/posts')->with('success', 'El post se ha actualizado correctamente');
+public function update(PostRequest $request, string $id)
+{
+    $post = Post::findOrFail($id);
 
-    }
+    $post->update($request->validated());
+
+    return redirect()
+        ->route('posts.index')
+        ->with('success', 'El post se ha actualizado correctamente');
+}
 
     /**
      * Remove the specified resource from storage.
