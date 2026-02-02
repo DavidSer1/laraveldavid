@@ -9,6 +9,7 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -38,12 +39,13 @@ public function store(PostRequest $request)
     Post::create([
         'titulo' => $request->titulo,
         'contenido' => $request->contenido,
-        'usuario_id' => 17, 
+        'usuario_id' => auth()->id(), 
     ]);
 
     return redirect()->route('posts.index')
         ->with('success', 'Post creado correctamente');
 }
+
 
 
     /**
