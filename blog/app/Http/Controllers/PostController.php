@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Post;
 
@@ -70,11 +71,21 @@ public function nuevoPrueba() {
 }
 
 
-public function destroy(string $id) {
-    Post::findOrFail($id)->delete();
+public function destroy(string $id)
+{
+    $post = Post::findOrFail($id);
+    $user = Auth::user();
+
+    if ($user->rol !== 'admin' && $post->usuario_id !== $user->id) {
+        return redirect()->route('posts.index');
+    }
+
+    $post->delete();
+
     return redirect()->route('posts.index')
-    ->with('success', 'Post eliminado correctamente');
+        ->with('success', 'Post eliminado correctamente');
 }
+
 
 public function editarPrueba(string $id){
     $posts = Post::findOrFail($id);
@@ -88,12 +99,18 @@ public function editarPrueba(string $id){
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+ public function edit(string $id)
+{
     $post = Post::findOrFail($id);
-    return view('posts.edit', compact('post'));
+    $user = Auth::user();
 
+    if ($user->rol !== 'admin' && $post->usuario_id !== $user->id) {
+        return redirect()->route('posts.index');
     }
+
+    return view('posts.edit', compact('post'));
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -101,6 +118,11 @@ public function editarPrueba(string $id){
 public function update(PostRequest $request, string $id)
 {
     $post = Post::findOrFail($id);
+    $user = Auth::user();
+
+    if ($user->rol !== 'admin' && $post->usuario_id !== $user->id) {
+        return redirect()->route('posts.index');
+    }
 
     $post->update($request->validated());
 
@@ -108,6 +130,7 @@ public function update(PostRequest $request, string $id)
         ->route('posts.index')
         ->with('success', 'El post se ha actualizado correctamente');
 }
+
 
     /**
      * Remove the specified resource from storage.

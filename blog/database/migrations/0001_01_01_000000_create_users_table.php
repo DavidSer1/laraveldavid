@@ -15,11 +15,11 @@ Schema::create('usuarios', function (Blueprint $table) {
     $table->id();
     $table->string('name');
     $table->string('email')->unique(); 
+    $table->string('rol')->default('user');
+
     $table->string('password');
     $table->timestamps();
 });
-
-
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
                     $table->string('email')->primary();

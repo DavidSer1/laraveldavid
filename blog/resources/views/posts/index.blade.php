@@ -50,22 +50,23 @@
         Ver
     </a>
 
-    @auth
-        @if(auth()->id() === $post->usuario_id)
-            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning btn-sm me-1">
-                Editar
-            </a>
+   @auth
+    @if(auth()->user()->rol === 'admin' || auth()->id() === $post->usuario_id)
+        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning btn-sm me-1">
+            Editar
+        </a>
 
-            <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline">
-                @method('DELETE')
-                @csrf
-                <button type="submit" class="btn btn-danger btn-sm"
-                    onclick="return confirm('¿Seguro que quieres borrar este post?')">
-                    Borrar
-                </button>
-            </form>
-        @endif
-    @endauth
+        <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline">
+            @method('DELETE')
+            @csrf
+            <button type="submit" class="btn btn-danger btn-sm"
+                onclick="return confirm('¿Seguro que quieres borrar este post?')">
+                Borrar
+            </button>
+        </form>
+    @endif
+@endauth
+
 </td>
 
                         </tr>
