@@ -1,11 +1,16 @@
 @extends('plantilla')
 
-@section('titulo', 'Listado de Posts')
+
 
 @section('contenido') 
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Listado de Posts</h2>
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-12">
+   <h2 class="text-center mb-4">Listado de Posts</h2>
+        </div>
+    </div>
+ 
     @auth
     <div class="d-flex justify-content-end mb-3">
     <a href="{{ url('/posts/create') }}" class="btn btn-success">
@@ -21,8 +26,8 @@
 @endif
 
     <div class="row justify-content-center">
-        
-        <div class="col-md-12">
+        <div class="col-1"></div>
+                <div class="col-md-10">
             <div class="table-responsive shadow-sm rounded">
                 <table class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
@@ -69,11 +74,12 @@
                 </table>
             </div>
 
-            <!-- Paginación -->
             <div class="d-flex justify-content-center mt-4">
                 {{ $posts->links() }}
             </div>
         </div>
+        <div class="col-1"></div>
+
     </div>
 </div>
 

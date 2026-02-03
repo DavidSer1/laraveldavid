@@ -9,7 +9,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <div class="container-fluid">
+  <div class="container-fluid px-0">
 
     <a class="navbar-brand text-white" href="{{ route('inicio') }}">
         Mi Proyecto
@@ -48,14 +48,11 @@
         @endif
 
     
-        <li class="nav-item ms-auto d-flex align-items-center">
-
-         
-          @auth
-          <span class="fw-bold text-white me-3">
-            {{ auth()->user()->name }}
-          </span>
-          <form action="{{ route('logout') }}" method="POST" class="d-inline">
+        <div class="nav-item d-flex justify-content-end text-end align-items-center gap-2 pe-5  flex-grow-1">
+    @auth
+         <li class="fw-bold nav-link text-white me-3">   {{ auth()->user()->name }}  </li>
+      
+          <form action="{{ route('logout') }}" method="POST" class="d-inline ms-4">
               @csrf
               <button type="submit" class="btn btn-outline-light btn-sm">
                   Cerrar sesión
@@ -70,7 +67,7 @@
           </a>
           @endguest
 
-        </li>
+        </div>
 
       </ul>
 
