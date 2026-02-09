@@ -30,9 +30,7 @@ public function index()
      */
    public function create()
 {
-    if (!Auth::check()) {
-        return redirect()->route('login');
-    }
+ 
 
     return view('posts.create');
 }
