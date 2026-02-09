@@ -50,12 +50,16 @@
         Ver
     </a>
 
-   @auth
-    @if(auth()->user()->rol === 'admin' || auth()->id() === $post->usuario_id)
+@auth
+
+    @if(auth()->id() === $post->usuario_id || auth()->user()->rol === 'admin')
         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning btn-sm me-1">
             Editar
         </a>
+    @endif
 
+
+    @if(auth()->user()->rol === 'admin')
         <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline">
             @method('DELETE')
             @csrf
@@ -66,6 +70,7 @@
         </form>
     @endif
 @endauth
+
 
 </td>
 
