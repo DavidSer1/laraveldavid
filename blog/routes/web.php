@@ -34,12 +34,15 @@ Route::post('/logout', [LoginController::class, 'logout'])
 | POSTS
 |--------------------------------------------------------------------------
 */
+Route::middleware('auth')->group(function () {
+    Route::get('/posts/create', [PostController::class, 'create']);
+});
 
-// Ver posts → cualquiera
+
 Route::resource('posts', PostController::class)
-    ->only(['index', 'show']);
+    ->only(['index', 'show',]);
 
-// Crear post → usuario logueado
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/posts/create', [PostController::class, 'create'])
@@ -48,13 +51,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts', [PostController::class, 'store'])
         ->name('posts.store');
 
-    // 👉 SOLO ADMIN
+
     Route::middleware('rol:admin')->group(function () {
         Route::delete('/posts/{post}', [PostController::class, 'destroy'])
             ->name('posts.destroy');
     });
 
-    // 👉 Admin O propietario (controlado en controller)
     Route::get('/posts/{post}/edit', [PostController::class, 'edit'])
         ->name('posts.edit');
 

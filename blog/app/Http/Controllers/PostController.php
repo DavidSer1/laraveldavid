@@ -10,6 +10,7 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+    
 
     /**
      * Display a listing of the resource.
@@ -27,10 +28,15 @@ public function index()
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-  return view('posts.create');
+   public function create()
+{
+    if (!Auth::check()) {
+        return redirect()->route('login');
     }
+
+    return view('posts.create');
+}
+
 
     /**
      * Store a newly created resource in storage.

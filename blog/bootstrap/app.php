@@ -12,10 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-$middleware->alias([
-    'auth' => Authenticate::class,  // Ahora apunta a tu middleware real
-]);
+->withMiddleware(function ($middleware) {
+    $middleware->alias([
+        'rol'  => \App\Http\Middleware\RolMiddleware::class,
+        'auth' => \App\Http\Middleware\Authenticate::class,
+    ]);
 
         //
     })
