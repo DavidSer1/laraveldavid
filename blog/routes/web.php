@@ -14,9 +14,8 @@ Route::get('/', function () {
 })->name('inicio');
 
 /*
-|--------------------------------------------------------------------------
-| AUTH
-|--------------------------------------------------------------------------
+ AUTH
+
 */
 Route::get('/login', [LoginController::class, 'showLogin'])
     ->middleware('guest')
@@ -33,33 +32,12 @@ Route::post('/logout', [LoginController::class, 'logout'])
 |--------------------------------------------------------------------------
 | POSTS
 |--------------------------------------------------------------------------
+
 */
-Route::middleware('auth')->group(function () {
-    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-});
 
 
+Route::middleware(['auth'])->resource('posts', PostController::class)
+->except(['index', 'show']);
 
-Route::resource('posts', PostController::class)
-    ->only(['index', 'show',]);
+Route::resource('posts', PostController::class)->only(['index', 'show']);
 
-
-Route::middleware('auth')->group(function () {
-
-
-
-    Route::post('/posts', [PostController::class, 'store'])
-        ->name('posts.store');
-
-
-    Route::middleware('rol:admin')->group(function () {
-        Route::delete('/posts/{post}', [PostController::class, 'destroy'])
-            ->name('posts.destroy');
-    });
-
-    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])
-        ->name('posts.edit');
-
-    Route::put('/posts/{post}', [PostController::class, 'update'])
-        ->name('posts.update');
-});

@@ -26,8 +26,8 @@
 @endif
 
     <div class="row justify-content-center">
-        <div class="col-1"></div>
-                <div class="col-md-10">
+ 
+                <div class="col-md-12">
             <div class="table-responsive shadow-sm rounded">
                 <table class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
@@ -52,23 +52,23 @@
 
 @auth
 
-    @if(auth()->id() === $post->usuario_id || auth()->user()->rol === 'admin')
-        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning btn-sm me-1">
-            Editar
-        </a>
-    @endif
 
 
-    @if(auth()->user()->rol === 'admin')
-        <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline">
-            @method('DELETE')
-            @csrf
-            <button type="submit" class="btn btn-danger btn-sm"
-                onclick="return confirm('¿Seguro que quieres borrar este post?')">
-                Borrar
-            </button>
-        </form>
-    @endif
+@if(auth()->user()->rol === 'admin' || auth()->id() === $post->usuario_id)
+    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning btn-sm me-1">
+        Editar
+    </a>
+
+    <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline">
+        @method('DELETE')
+        @csrf
+        <button type="submit" class="btn btn-danger btn-sm"
+            onclick="return confirm('¿Seguro que quieres borrar este post?')">
+            Borrar
+        </button>
+    </form>
+@endif
+
 @endauth
 
 
